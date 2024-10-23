@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <video autoplay muted loop class="video-background" id="background-video">
+        <source src="BG-video.mp4" type="video/mp4"> <!-- Video for larger screens -->
+        <source src="BG-mobile.mp4" type="video/mp4"> <!-- This can be ignored for mobile view -->
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="calculator">
+        <h2>Calculator</h2>
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button onclick="clearDisplay()">CE</button> 
+            <button onclick="clearAll()">C</button>  
+            <button onclick="calculateSquareRoot()">√</button>  
+            <button onclick="appendToDisplay('/')">/</button>  
+            <button onclick="appendToDisplay('7')">7</button>  
+            <button onclick="appendToDisplay('8')">8</button>  
+            <button onclick="appendToDisplay('9')">9</button>  
+            <button onclick="appendToDisplay('*')">*</button>  
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('%')">%</button>
+            <button onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function appendToDisplay(value) {
+            if (value === '.' && display.value.includes('.')) return;
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function clearAll() {
+            display.value = '';
+        }
+
+        function calculateSquareRoot() {
+            if (display.value) {
+                display.value = Math.sqrt(eval(display.value)).toString();
+            }
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value).toString();
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+
+</body>
+</html>
